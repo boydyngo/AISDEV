@@ -1,0 +1,9 @@
+{
+    "servers": {
+        "my-mcp-server-0f00514d": {
+            "type": "stdio",
+            "command": "C:\\\\Users\\\\d0wil\\\\AppData\\\\Local\\\\code-sandbox-mcp\\\\code-sandbox-mcp.exe",
+            "args": []
+        }
+    }
+}

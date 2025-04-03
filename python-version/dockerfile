@@ -1,0 +1,25 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+# Set working directory
+WORKDIR /app
+
+# Install Python 3.9
+RUN powershell -Command \
+    Invoke-WebRequest -Uri https://www.python.org/ftp/python/3.9.7/python-3.9.7-amd64.exe -OutFile python-installer.exe; \
+    Start-Process -FilePath python-installer.exe -ArgumentList '/quiet InstallAllUsers=1 PrependPath=1' -NoNewWindow -Wait; \
+    Remove-Item -Force python-installer.exe
+
+# Verify Python installation
+RUN python --version
+
+# Copy the application code
+COPY . /app
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Expose the port used by the Python backend
+EXPOSE 5000
+
+# Command to run the Python backend
+CMD ["python", "main.py"]

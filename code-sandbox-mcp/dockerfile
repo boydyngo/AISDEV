@@ -1,0 +1,13 @@
+FROM mcr.microsoft.com/windows/servercore:ltsc2022
+
+# Set working directory
+WORKDIR /app
+
+# Copy the MCP executable
+COPY code-sandbox-mcp.exe /app/
+
+# Expose the port used by the MCP server
+EXPOSE 4000
+
+# Command to run the MCP server
+CMD ["./code-sandbox-mcp.exe"]

@@ -1,0 +1,37 @@
+version: '3.8'
+services:
+  python-backend:
+    build:
+      context: ./python-version
+      dockerfile: Dockerfile
+    working_dir: /app
+    command: python main.py
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./python-version:/app
+  mcp-server:
+    build:
+      context: ./code-sandbox-mcp
+      dockerfile: dockerfile
+    ports:
+      - "4000:4000"
+    command: ./code-sandbox-mcp.exe
+    volumes:
+      - ./code-sandbox-mcp:/app
+  web-client:
+    build:
+      context: ./web-version/client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./web-version/client:/app
+  web-server:
+    build:
+      context: ./web-version/server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./web-version/server:/app
